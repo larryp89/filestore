@@ -1,0 +1,32 @@
+PLAN
+1. Install relevant dependencies:
+  - bcrypt (passwords)
+  - dotenv
+  - ejs
+  - express
+  - experss validator
+  - express session
+  - passport
+  - passport-local
+  - prisma & prisma session store
+  - multer
+
+2. Set up the database using prisma:
+  - Write a schema
+  - Connect to the database
+
+  - Databases:
+    - Users
+      - id (int)
+      - email(string - unique)
+      - password 
+
+
+3. Set up relevant routes on express:
+
+4. Add a form where users can upload a file and save it in a filesystem:
+  
+5. Add passport and login authentication:
+
+6. Store uploaded files in a cloud storage service:
+  
