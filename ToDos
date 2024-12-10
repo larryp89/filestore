@@ -29,4 +29,8 @@ PLAN
 5. Add passport and login authentication:
 
 6. Store uploaded files in a cloud storage service:
+
+1. Install dependencies
+2. Set up app.js
+3. Create views folder
   
