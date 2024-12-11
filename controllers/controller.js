@@ -1,3 +1,5 @@
+// The controller extracts data from the request and calls the service method:  
+
 const { validationResult } = require("express-validator");
 const userService = require("../services/userService");
 

@@ -4,6 +4,7 @@ const path = require("node:path");
 const router = require("./routes/router.js");
 const sessionMiddleware = require("./config/session.js");
 const passport = require("./config/passport");
+const errorHandler = require("./middleware/errorHandler.js");
 
 // Configure the app to use EJS and specify the directory for EJS templates
 app.set("views", path.join(__dirname, "views")); // Tells Express to look for template files in the views directory.
@@ -19,6 +20,7 @@ app.use(express.static(assetsPath));
 // Set up session, which happens on every route request
 app.use(sessionMiddleware);
 app.use(passport.session());
+app.use(errorHandler);
 
 // Allows the currently authenticated user to be accessible in views as currentUser rather than passing in {} to each contoller/view
 app.use((req, res, next) => {
