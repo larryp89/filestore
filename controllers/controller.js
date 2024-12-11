@@ -1,4 +1,4 @@
-// The controller extracts data from the request and calls the service method:  
+// The controller extracts data from the request and calls the service method:
 
 const { validationResult } = require("express-validator");
 const userService = require("../services/userService");
@@ -17,8 +17,22 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = {
-  createUser,
+const createFolder = async (req, res) => {
+  const folderName = req.body.folderName;
+  const userID = req.user.id;
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("home", { errors: errors.array() });
+    }
+    await userService.createFolder(folderName, userID);
+    return res.render("home", { errors: [] });
+  } catch (error) {
+    console.log("Error creating folder:", error);
+  }
 };
 
-module.exports = { createUser };
+module.exports = {
+  createUser,
+  createFolder,
+};

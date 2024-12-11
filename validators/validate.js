@@ -28,4 +28,13 @@ const validateSignUp = [
   }),
 ];
 
-module.exports = validateSignUp;
+const validateFolderName = [
+  body("folderName")
+    .trim()
+    .notEmpty()
+    .withMessage("Folder name cannot be empty")
+    .isAlphanumeric()
+    .withMessage("Name can only contain alphanumeric characters"),
+];
+
+module.exports = { validateSignUp, validateFolderName };

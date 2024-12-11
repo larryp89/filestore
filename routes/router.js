@@ -3,11 +3,14 @@ const { Router } = require("express");
 const router = Router();
 const passport = require("../config/passport");
 const controller = require("../controllers/controller");
-const validateSignUp = require("../validators/validate");
+const {
+  validateSignUp,
+  validateFolderName,
+} = require("../validators/validate");
 const upload = require("../config/multer");
 
 // Routes
-router.get("/", (req, res) => res.render("home"));
+router.get("/", (req, res) => res.render("home", { errors: [] }));
 router.get("/sign-up", (req, res) => res.render("sign-up", { errors: [] }));
 router.post("/sign-up", validateSignUp, controller.createUser);
 
@@ -37,4 +40,4 @@ router.post("/upload-files", upload.single("file"), (req, res, next) => {
 });
 
 // Create a folder
-router.post("/create-folder");
+router.post("/create-folder", validateFolderName, controller.createFolder);

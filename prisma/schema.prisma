@@ -30,10 +30,12 @@ model Session {
 
 model Folder {
   id          Int    @id @default(autoincrement())
-  folder_name String @unique
-  user        User   @relation(fields: [userId], references: [id]) // Not featured in the DB
-  userId      Int // featured in the DB
+  folder_name String
+  user        User   @relation(fields: [user_ID], references: [id]) // Not featured in the DB
+  user_ID     Int // featured in the DB
   File        File[]
+
+  @@unique([folder_name, user_ID]) // Folder names must be unique within a user, but not between users
 }
 
 model File {
