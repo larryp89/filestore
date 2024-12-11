@@ -1,25 +1,22 @@
-const prisma = require("../db/db");
-const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
-const repository = require("../prisma/repository");
+const userService = require("../services/userService");
 
-async function addUser(req, res) {
+const createUser = async (req, res) => {
+  const { email, password } = req.body;
   try {
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       return res.render("sign-up", { errors: errors.array() });
     }
-
-    const email = req.body.email;
-    const password = req.body.password;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    repository.addUser(email, hashedPassword);
-    res.render("home");
+    const newUser = await userService.createUser(email, password);
+    return res.render("home");
   } catch (error) {
-    console.error("Error adding user:", error);
-    res.status(500).send("An error occurred while adding the user.");
+    console.log("Failed to create user", error);
   }
-}
+};
 
-module.exports = { addUser };
+module.exports = {
+  createUser,
+};
+
+module.exports = { createUser };

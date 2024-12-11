@@ -1,6 +1,6 @@
 const session = require("express-session"); // Stores information about a user's interaction across different pages of a website via a unique id
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
-const prisma = require("../db/db");
+const prisma = require("../prisma/client");
 
 const sessionMiddleware = session({
   cookie: {
