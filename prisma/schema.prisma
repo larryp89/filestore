@@ -14,9 +14,10 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
   password String
+  folders  Folder[]
 }
 
 // Needed in the DB for sessions to work otherwise get undefined error in passport deserialize
@@ -25,4 +26,19 @@ model Session {
   sid       String   @unique
   data      String
   expiresAt DateTime
+}
+
+model Folder {
+  id          Int    @id @default(autoincrement())
+  folder_name String @unique
+  user        User   @relation(fields: [userId], references: [id]) // Not featured in the DB
+  userId      Int // featured in the DB
+  File        File[]
+}
+
+model File {
+  id        Int    @id @default(autoincrement())
+  file_name String @unique
+  folder    Folder @relation(fields: [folderId], references: [id])
+  folderId  Int
 }
