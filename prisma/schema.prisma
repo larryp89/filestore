@@ -19,6 +19,7 @@ model User {
   password String
 }
 
+// Needed in the DB for sessions to work otherwise get undefined error in passport deserialize
 model Session {
   id        String   @id
   sid       String   @unique

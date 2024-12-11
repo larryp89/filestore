@@ -27,11 +27,10 @@ passport.use(
         }
 
         // Check password
-        // const match = await bcrypt.compare(password, user.password);
-        // if (!match) {
-        //   return done(null, false, { message: "Incorrect password" });
-        // }
-        else {
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+          return done(null, false, { message: "Incorrect password" });
+        } else {
           // Success
           return done(null, user);
         }
@@ -54,11 +53,11 @@ passport.deserializeUser(async (id, done) => {
       where: {
         id: id,
       },
+      select: {
+        id: true,
+        email: true,
+      },
     });
-
-    if (!user) {
-      return done(null, false);
-    }
 
     done(null, user);
   } catch (err) {

@@ -7,16 +7,29 @@
   </head>
   <body>
     <h1>Home Page</h1>
-    <h1>LOGGED IN</h1>
+    <% if (currentUser) { %>
+      <h1>Hi <%= currentUser.email %></h1>
+      <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
 
-    <h2>Please login</h2>
+      <h2>Upload a document here!</h2>
+      <form action="/upload_files" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+        
+      </form>
+    
+    <% } else { %>
+         <h2>Please log in</h2>
     <form action="/login" method="POST">
       <label for="email">Email</label>
       <input type="email" name="email" id="email" />
       <label for="password">Password</label>
       <input type="password" name="password" id="password" />
       <button type="submit">Login</button>
-      <a href="sign-up">Sign up</a>
+      <a href="/sign-up">Sign up</a>
     </form>
+    <% } %>
   </body>
 </html>

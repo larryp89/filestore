@@ -6,11 +6,11 @@ const sessionMiddleware = session({
   cookie: {
     maxAge: 7 * 24 * 60 * 60 * 1000, // ms
   },
-  secret: "okay",
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
   store: new PrismaSessionStore(prisma, {
-    checkPeriod: 2 * 60 * 1000,
+    checkPeriod: 2 * 60 * 1000, //ms
     dbRecordIdIsSessionId: true,
     dbRecordIdFunction: undefined,
   }),

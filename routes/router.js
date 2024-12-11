@@ -2,22 +2,25 @@
 const { Router } = require("express");
 const router = Router();
 const passport = require("../config/passport");
+const controller = require("../controllers/controller");
+const validateSignUp = require("../validators/validate");
+const upload = require("../config/multer");
 
 // Routes
 router.get("/", (req, res) => res.render("home"));
-router.get("/login", (req, res) => res.send("fail"));
-router.get("/success", (req, res) => res.send("success"));
+router.get("/sign-up", (req, res) => res.render("sign-up", { errors: [] }));
+router.post("/sign-up", validateSignUp, controller.addUser);
 
+// Authenticated login/logout routes
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/success",
-    failureRedirect: "/login",
+    successRedirect: "/",
+    failureRedirect: "/",
   }),
 );
 
 router.post("/logout", (req, res, next) => {
-  // Passport adds a logout property to the req object
   req.logout((err) => {
     if (err) {
       return next(err);
@@ -27,3 +30,8 @@ router.post("/logout", (req, res, next) => {
 });
 
 module.exports = router;
+
+// File upload
+router.post("/upload_files", upload.single("file"), (req, res, next) => {
+  res.send("Upload success");
+});
