@@ -44,9 +44,7 @@ router.post("/logout", (req, res, next) => {
 module.exports = router;
 
 // File upload
-router.post("/upload-files", upload.single("file"), (req, res, next) => {
-  res.send("Upload success");
-});
+router.post("/add-file", upload.single("file"), controller.uploadFile);
 
 // Create a folder
 router.post("/create-folder", validateFolderName, controller.createFolder);

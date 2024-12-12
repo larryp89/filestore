@@ -1,5 +1,4 @@
 // The controller extracts data from the request and calls the service method:
-
 const { validationResult } = require("express-validator");
 const userService = require("../services/userService");
 
@@ -32,7 +31,16 @@ const createFolder = async (req, res) => {
   }
 };
 
+const uploadFile = async (req, res) => {
+  const buffer = req.file.buffer;
+  const filename = req.file.originalname;
+  const userID = req.user.id;
+  userService.uploadToSupabase(buffer, filename, userID);
+  res.render("home", { errors: [] });
+};
+
 module.exports = {
   createUser,
   createFolder,
+  uploadFile,
 };

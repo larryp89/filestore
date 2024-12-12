@@ -18,6 +18,7 @@ model User {
   email    String   @unique
   password String
   folders  Folder[]
+  File     File[]
 }
 
 // Needed in the DB for sessions to work otherwise get undefined error in passport deserialize
@@ -43,6 +44,10 @@ model File {
   file_name String
   folder    Folder? @relation(fields: [folder_ID], references: [id])
   folder_ID Int? // Optional since a file can exist outside of a folder
+  user      User    @relation(fields: [user_ID], references: [id])
+  user_ID   Int
+  file_type String
+  file_size Int
 
   @@unique([file_name, folder_ID])
 }
