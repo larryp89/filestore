@@ -14,8 +14,14 @@ const isAuth = require("../middleware/isAuth");
 router.get("/", (req, res) => res.render("home", { errors: [] }));
 router.get("/sign-up", (req, res) => res.render("sign-up", { errors: [] }));
 router.post("/sign-up", validateSignUp, controller.createUser);
-router.get("/add-file", isAuth, (req, res) => res.render("add-file"));
-router.get("/create-folder", isAuth, (req, res) => res.render("create-folder"));
+router.get("/add-file", isAuth, (req, res) =>
+  res.render("add-file", {
+    errors: [],
+  }),
+);
+router.get("/create-folder", isAuth, (req, res) =>
+  res.render("create-folder", { errors: [] }),
+);
 
 // Authenticated login/logout routes
 router.post(

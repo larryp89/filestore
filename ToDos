@@ -30,7 +30,9 @@ PLAN
 
 6. Store uploaded files in a cloud storage service:
 
-1. Install dependencies
-2. Set up app.js
-3. Create views folder
-  
+TODO: Change Admin details in seed
+
+Application flow:
+- Login/Sign up
+- Create a file (via Prisma)
+- Upload a file (Multer --> Store in supabase bucket)

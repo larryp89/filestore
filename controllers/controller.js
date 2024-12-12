@@ -23,16 +23,14 @@ const createFolder = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render("home", { errors: errors.array() });
+      return res.render("create-folder", { errors: errors.array() });
     }
     await userService.createFolder(folderName, userID);
-    return res.render("home", { errors: [] });
+    return res.render("create-folder", { errors: [] });
   } catch (error) {
     console.log("Error creating folder:", error);
   }
 };
-
-const addFile = async (req, res) => {};
 
 module.exports = {
   createUser,
