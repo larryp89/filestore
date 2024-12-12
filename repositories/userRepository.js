@@ -35,6 +35,14 @@ async function addFile(fileName, folderID) {
   }
 }
 
+async function showFolders(userID) {
+  return await prisma.folder.findMany({
+    where: {
+      user_ID: userID,
+    },
+  });
+}
+
 module.exports = {
   createUser,
   createFolder,

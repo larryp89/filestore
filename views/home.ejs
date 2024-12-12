@@ -8,6 +8,11 @@
   <body>
     <h1>Home Page</h1>
     <% if (currentUser) { %>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/add-file">Add file</a>
+        <a href="/create-folder">Create folder</a>
+      </nav>
       <h1>Hi <%= currentUser.email %></h1>
       <form action="/logout" method="POST">
         <button type="submit">Logout</button>
@@ -21,22 +26,7 @@
             <% }) %>
           </ul>
         </div>
-        <% } %>
-
-      <h2>Create folder</h2>
-      <form action="/create-folder" method="POST">
-          <input type="text" name="folderName" >
-          <button type="submit">Create</button>
-          
-        </form>        
-      </form>
-      <h2>Upload a document here!</h2>
-      <form action="/upload-files" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">Upload</button>
-        
-      </form>
-    
+        <% } %>    
     <% } else { %>
          <h2>Please log in</h2>
     <form action="/login" method="POST">
