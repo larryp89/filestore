@@ -20,7 +20,23 @@ async function createFolder(folderName, userID) {
   });
 }
 
+async function addFile(fileName, folderID) {
+  if (!folderID) {
+    return await prisma.file.create({
+      data: { file_name: fileName },
+    });
+  } else {
+    return await prisma.file.create({
+      data: {
+        file_name: fileName,
+        folder_ID: folderID,
+      },
+    });
+  }
+}
+
 module.exports = {
   createUser,
   createFolder,
+  addFile,
 };

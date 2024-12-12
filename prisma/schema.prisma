@@ -39,8 +39,10 @@ model Folder {
 }
 
 model File {
-  id        Int    @id @default(autoincrement())
-  file_name String @unique
-  folder    Folder @relation(fields: [folderId], references: [id])
-  folderId  Int
+  id        Int     @id @default(autoincrement())
+  file_name String
+  folder    Folder? @relation(fields: [folder_ID], references: [id])
+  folder_ID Int? // Optional since a file can exist outside of a folder
+
+  @@unique([file_name, folder_ID])
 }

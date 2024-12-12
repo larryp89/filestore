@@ -32,6 +32,8 @@ const createFolder = async (req, res) => {
   }
 };
 
+const addFile = async (req, res) => {};
+
 module.exports = {
   createUser,
   createFolder,
