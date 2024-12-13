@@ -18,4 +18,19 @@ const postSignup = async (req, res) => {
 const getLogin = async (req, res) => {
   res.render("login", { errors: [] });
 };
-module.exports = { getSignup, postSignup, getLogin };
+
+const postLogin = passport.authenticate("local", {
+  failureRedirect: "/login",
+  failureFlash: true,
+  successRedirect: "/",
+});
+
+const logout = async (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
+module.exports = { getSignup, postSignup, getLogin, postLogin, logout };

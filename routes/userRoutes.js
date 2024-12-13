@@ -7,13 +7,7 @@ const userController = require("../controllers/userController");
 userRoutes.get("/sign-up", userController.getSignup);
 userRoutes.post("/sign-up", validateSignUp, userController.postSignup);
 userRoutes.get("/login", userController.getLogin);
-// userRoutes.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     successRedirect: "/",
-//     failureRedirect: "/login",
-//     failureFlash: true,
-//   }),
-// );
+userRoutes.post("/login", userController.postLogin);
+userRoutes.post("/logout", userController.logout);
 
 module.exports = userRoutes;

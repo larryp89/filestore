@@ -22,12 +22,13 @@ app.use(express.static(assetsPath));
 // Set up session, which happens on every route request
 app.use(sessionMiddleware);
 app.use(passport.session());
+app.use(flash());
 app.use(errorHandler);
-app.use(flash);
 
 // Allows the currently authenticated user to be accessible in views as currentUser rather than passing in {} to each contoller/view
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.message = req.flash();
   next();
 });
 
