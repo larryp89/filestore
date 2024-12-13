@@ -6,17 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Home Page</h1>
-    <!-- <% if (currentUser) { %>
-      <%- include('./partials/navbar') %>
-      <h1>Hi <%= currentUser.email %></h1>
-      <form action="/logout" method="POST">
-        <button type="submit">Logout</button>
-      </form>
-
-     <%- include('./partials/errors') %>
-    <% } else { %>
-         <h2>Please log in</h2>
+    <h1>Login here</h1>
+    <% if (messages.error) { %>
+    <div class="error"><%= messages.error %></div>
+    <% } %>
     <form action="/login" method="POST">
       <label for="email">Email</label>
       <input type="email" name="email" id="email" />
@@ -25,6 +18,5 @@
       <button type="submit">Login</button>
       <a href="/sign-up">Sign up</a>
     </form>
-    <% } %> -->
   </body>
 </html>

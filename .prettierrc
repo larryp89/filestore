@@ -1,15 +1,14 @@
 {
-    "plugins": ["prettier-plugin-prisma"],
-    "overrides": [
-      {
-        "files": "*.prisma",
-        "options": {
-          "tabWidth": 2,
-          "useTabs": false,
-          "singleQuote": true,
-          "trailingComma": "es5"
-        }
+  "plugins": ["prettier-plugin-prisma", "prettier-plugin-ejs"],
+  "overrides": [
+    {
+      "files": "*.prisma",
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false,
+        "singleQuote": true,
+        "trailingComma": "es5"
       }
-    ]
-  }
-  
+    }
+  ]
+}

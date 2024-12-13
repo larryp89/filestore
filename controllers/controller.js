@@ -31,11 +31,26 @@ const createFolder = async (req, res) => {
   }
 };
 
+const displayFolders = async (req, res) => {
+  const currentUser = req.user.id;
+  const folders = await userService.getFolders(currentUser);
+  console.log(folders);
+  res.render("all-uploads", { folders });
+};
+
 const uploadFile = async (req, res) => {
+  // Extract file data
   const buffer = req.file.buffer;
   const filename = req.file.originalname;
   const userID = req.user.id;
-  userService.uploadToSupabase(buffer, filename, userID);
+
+  // Upload to Supabase
+  const { data, error } = await userService.uploadToSupabase(
+    buffer,
+    filename,
+    userID,
+  );
+  await userService.getPublicURL(data.path);
   res.render("home", { errors: [] });
 };
 
@@ -43,4 +58,5 @@ module.exports = {
   createUser,
   createFolder,
   uploadFile,
+  displayFolders,
 };

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>All your uploads are shown here</h1>
+    <% if (folders.length == 0) {%>
+    <h2>You have not created any folders</h2>
+    <% } else { %>
+    <% for(let folder of folders ) { %>
+    <li><%=folder.folder_name%></li>
+    <% } %>
+    <% } %>
+  </body>
+</html>

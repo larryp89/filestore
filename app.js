@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
 const path = require("node:path");
-const router = require("./routes/router.js");
+const flash = require("connect-flash");
 const sessionMiddleware = require("./config/session.js");
 const passport = require("./config/passport");
 const errorHandler = require("./middleware/errorHandler.js");
+const indexRoutes = require("./routes/indexRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 
 // Configure the app to use EJS and specify the directory for EJS templates
 app.set("views", path.join(__dirname, "views")); // Tells Express to look for template files in the views directory.
@@ -21,6 +23,7 @@ app.use(express.static(assetsPath));
 app.use(sessionMiddleware);
 app.use(passport.session());
 app.use(errorHandler);
+app.use(flash);
 
 // Allows the currently authenticated user to be accessible in views as currentUser rather than passing in {} to each contoller/view
 app.use((req, res, next) => {
@@ -29,8 +32,8 @@ app.use((req, res, next) => {
 });
 
 // Get routes from routers
-// Mount the indexRouter middleware at the root path ("/"), i.e. any paths handled by the corresponding route handlers
-app.use("/", router);
+app.use("/", indexRoutes);
+app.use("/", userRoutes);
 
 // NB process accessible on global object so don't need to require
 const PORT = process.env.PORT || 3000;

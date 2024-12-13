@@ -30,13 +30,16 @@ model Session {
 }
 
 model Folder {
-  id          Int    @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   folder_name String
-  user        User   @relation(fields: [user_ID], references: [id]) // Not featured in the DB
-  user_ID     Int // featured in the DB
-  File        File[]
+  user        User     @relation(fields: [user_ID], references: [id]) // Not shown in the DB
+  user_ID     Int // Shwon in the DB
+  files       File[]
+  parent_ID   Int? // References ID of another folder (Nullable for root folder)
+  parent      Folder?  @relation("Subfolders", fields: [parent_ID], references: [id])
+  subfolders  Folder[] @relation("Subfolders")
 
-  @@unique([folder_name, user_ID]) // Folder names must be unique within a user, but not between users
+  @@unique([folder_name, user_ID]) // Folder names must be unique   within a user, but not between users
 }
 
 model File {

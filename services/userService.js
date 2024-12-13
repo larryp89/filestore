@@ -3,6 +3,7 @@
 const userRepository = require("../repositories/userRepository");
 const bcrypt = require("bcryptjs");
 const supabase = require("../config/supabase");
+const supabaseBucket = "All Files";
 
 async function createUser(email, password) {
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -18,23 +19,30 @@ async function addFile(filename, folderID) {
 }
 
 async function getFolders(userID) {
-  return await userRepository.showFolders(userID);
+  return await userRepository.getFolders(userID);
 }
 
 async function uploadToSupabase(file, filename, userID) {
-  const { data, error } = await supabase.storage
+  return supabase.storage
     .from("All Files")
     .upload(`/${userID}/${filename}`, file, {
       cacheControl: "3600",
       upsert: false,
     });
-  console.log(data);
-  console.log(error);
 }
+
+async function getPublicURL(path) {
+  const { data } = await supabase.storage
+    .from(supabaseBucket)
+    .getPublicUrl(path);
+  console.log(data);
+}
+
 module.exports = {
   createUser,
   createFolder,
   addFile,
   getFolders,
   uploadToSupabase,
+  getPublicURL,
 };
