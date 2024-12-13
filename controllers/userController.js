@@ -6,7 +6,7 @@ const getSignup = async (req, res) => {
   res.render("sign-up", { errors: [] });
 };
 
-const postSignup = async (req, res) => {
+const signup = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.render("sign-up", { errors: errors.array() });
@@ -19,7 +19,7 @@ const getLogin = async (req, res) => {
   res.render("login", { errors: [] });
 };
 
-const postLogin = passport.authenticate("local", {
+const login = passport.authenticate("local", {
   failureRedirect: "/login",
   failureFlash: true,
   successRedirect: "/",
@@ -33,4 +33,4 @@ const logout = async (req, res) => {
     res.redirect("/");
   });
 };
-module.exports = { getSignup, postSignup, getLogin, postLogin, logout };
+module.exports = { getSignup, signup, getLogin, login, logout };

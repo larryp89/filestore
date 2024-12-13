@@ -7,6 +7,7 @@ const passport = require("./config/passport");
 const errorHandler = require("./middleware/errorHandler.js");
 const indexRoutes = require("./routes/indexRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
+const folderRoutes = require("./routes/folderRoutes.js");
 
 // Configure the app to use EJS and specify the directory for EJS templates
 app.set("views", path.join(__dirname, "views")); // Tells Express to look for template files in the views directory.
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 // Get routes from routers
 app.use("/", indexRoutes);
 app.use("/", userRoutes);
+app.use("/", folderRoutes);
 
 // NB process accessible on global object so don't need to require
 const PORT = process.env.PORT || 3000;

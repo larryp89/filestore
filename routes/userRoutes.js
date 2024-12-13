@@ -1,13 +1,12 @@
 const { Router } = require("express");
 const userRoutes = Router();
 const { validateSignUp } = require("../validators/validate");
-const passport = require("../config/passport");
 const userController = require("../controllers/userController");
 
 userRoutes.get("/sign-up", userController.getSignup);
-userRoutes.post("/sign-up", validateSignUp, userController.postSignup);
+userRoutes.post("/sign-up", validateSignUp, userController.signup);
 userRoutes.get("/login", userController.getLogin);
-userRoutes.post("/login", userController.postLogin);
+userRoutes.post("/login", userController.login);
 userRoutes.post("/logout", userController.logout);
 
 module.exports = userRoutes;

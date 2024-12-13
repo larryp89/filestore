@@ -7,7 +7,8 @@
   </head>
   <body>
     <h2>Create folder</h2>
-    <%- include('./partials/navbar') %> <%- include('./partials/errors') %>
+    <%- include('./partials/navbar') %>
+    <%- include('./partials/errors') %>
     <form action="/create-folder" method="POST">
       <input type="text" name="folderName" />
       <button type="submit">Create</button>
