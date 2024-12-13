@@ -1,11 +1,13 @@
 const { validationResult } = require("express-validator");
 const userService = require("../services/userService");
 
-const getCreateFolder = (req, res) => {
-  res.render("create-folder", { errors: [] });
+const getCreateFolder = async (req, res) => {
+  const folders = await userService.getFolders(req.user.id);
+  console.log(folders);
+  res.render("create-folder", { errors: [], folders: folders });
 };
 
-const createFolder = async (req, res) => {  
+const createFolder = async (req, res) => {
   const folderName = req.body.folderName;
   const userID = req.user.id;
 
