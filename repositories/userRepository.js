@@ -11,11 +11,12 @@ async function createUser(email, password) {
   });
 }
 
-async function createFolder(folderName, userID) {
+async function createFolder(folderName, userID, parentID) {
   return await prisma.folder.create({
     data: {
       folder_name: folderName,
       user_ID: userID,
+      parent_ID: parentID,
     },
   });
 }

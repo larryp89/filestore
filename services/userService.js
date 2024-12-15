@@ -10,8 +10,8 @@ async function createUser(email, password) {
   return await userRepository.createUser(email, hashedPassword);
 }
 
-async function createFolder(folderName, userID) {
-  return await userRepository.createFolder(folderName, userID);
+async function createFolder(folderName, userID, parentID) {
+  return await userRepository.createFolder(folderName, userID, parentID);
 }
 
 async function addFile(filename, folderID) {
