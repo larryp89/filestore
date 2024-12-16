@@ -1,6 +1,26 @@
-<h2>Upload a document here!</h2>
-<%- include('./partials/navbar') %> <%- include('./partials/errors') %>
-<form action="/add-file" method="POST" enctype="multipart/form-data">
-  <input type="file" name="file" />
-  <button type="submit">Upload</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Upload a document here!</h2>
+    <%- include('./partials/navbar') %>
+    <%- include('./partials/errors') %>
+    <form action="/add-file" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" />
+      <label for="parentFolder">Save to</label>
+      <select name="parentFolder" id="parentFolder">
+        <% if (folders.length > 0) { %>
+        <option>(No parent folder)</option>
+        <% for( let folder of folders) { %>
+        <option value="<%= folder.id %>"><%= folder.folder_name %></option>
+        <% } %>
+        <% } %>
+      </select>
+      <button type="submit">Upload</button>
+    </form>
+  </body>
+</html>

@@ -51,6 +51,7 @@ model File {
   user_ID   Int
   file_type String
   file_size Int
+  file_URL  String
 
   @@unique([file_name, folder_ID])
 }

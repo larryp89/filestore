@@ -21,25 +21,30 @@ async function createFolder(folderName, userID, parentID) {
   });
 }
 
-async function addFile(fileName, folderID) {
-  if (!folderID) {
-    return await prisma.file.create({
-      data: { file_name: fileName },
-    });
-  } else {
-    return await prisma.file.create({
-      data: {
-        file_name: fileName,
-        folder_ID: folderID,
-      },
-    });
-  }
-}
-
 async function getFolders(userID) {
   return await prisma.folder.findMany({
     where: {
       user_ID: userID,
+    },
+  });
+}
+
+async function addFile(
+  fileName,
+  folderID,
+  userID,
+  fileType,
+  fileSize,
+  fileURL,
+) {
+  return await prisma.file.create({
+    data: {
+      file_name: fileName,
+      folder_ID: folderID,
+      user_ID: userID,
+      file_type: fileType,
+      file_size: fileSize,
+      file_URL: fileURL,
     },
   });
 }

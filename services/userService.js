@@ -14,8 +14,22 @@ async function createFolder(folderName, userID, parentID) {
   return await userRepository.createFolder(folderName, userID, parentID);
 }
 
-async function addFile(filename, folderID) {
-  return await userRepository.addFile(folderID, folderID);
+async function addFileToDatabase(
+  filename,
+  folderID,
+  userID,
+  fileType,
+  fileSize,
+  fileURL,
+) {
+  return await userRepository.addFile(
+    filename,
+    folderID,
+    userID,
+    fileType,
+    fileSize,
+    fileURL,
+  );
 }
 
 async function getFolders(userID) {
@@ -32,16 +46,13 @@ async function uploadToSupabase(file, filename, userID) {
 }
 
 async function getPublicURL(path) {
-  const { data } = await supabase.storage
-    .from(supabaseBucket)
-    .getPublicUrl(path);
-  console.log(data);
+  return await supabase.storage.from(supabaseBucket).getPublicUrl(path);
 }
 
 module.exports = {
   createUser,
   createFolder,
-  addFile,
+  addFileToDatabase,
   getFolders,
   uploadToSupabase,
   getPublicURL,

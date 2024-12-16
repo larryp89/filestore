@@ -3,7 +3,6 @@ const userService = require("../services/userService");
 
 const getCreateFolder = async (req, res) => {
   const folders = await userService.getFolders(req.user.id);
-  console.log(folders);
   res.render("create-folder", { errors: [], folders: folders });
 };
 

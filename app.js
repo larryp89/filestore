@@ -8,6 +8,7 @@ const errorHandler = require("./middleware/errorHandler.js");
 const indexRoutes = require("./routes/indexRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const folderRoutes = require("./routes/folderRoutes.js");
+const fileRoutes = require("./routes/fileRoutes.js");
 
 // Configure the app to use EJS and specify the directory for EJS templates
 app.set("views", path.join(__dirname, "views")); // Tells Express to look for template files in the views directory.
@@ -37,9 +38,10 @@ app.use((req, res, next) => {
 app.use("/", indexRoutes);
 app.use("/", userRoutes);
 app.use("/", folderRoutes);
+app.use("/", fileRoutes);
 
 // NB process accessible on global object so don't need to require
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
   console.log(`Filestore - listening on port ${PORT}!`);
