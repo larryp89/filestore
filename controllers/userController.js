@@ -1,6 +1,7 @@
 // Handles user interactions
 const { validationResult } = require("express-validator");
 const passport = require("../config/passport");
+const userService = require("../services/userService");
 
 const getSignup = async (req, res) => {
   res.render("sign-up", { errors: [] });
@@ -33,4 +34,10 @@ const logout = async (req, res) => {
     res.redirect("/");
   });
 };
-module.exports = { getSignup, signup, getLogin, login, logout };
+
+const getDocuments = async (req, res) => {
+  const currentUser = req.user.id;
+  const folders = await userService.getFolders(currentUser);
+  return res.render("documents", { folders });
+};
+module.exports = { getSignup, signup, getLogin, login, logout, getDocuments };

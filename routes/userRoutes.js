@@ -8,5 +8,6 @@ userRoutes.post("/sign-up", validateSignUp, userController.signup);
 userRoutes.get("/login", userController.getLogin);
 userRoutes.post("/login", userController.login);
 userRoutes.post("/logout", userController.logout);
+userRoutes.get("/documents", userController.getDocuments);
 
 module.exports = userRoutes;
