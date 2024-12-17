@@ -16,7 +16,7 @@ async function createFolder(folderName, userID, parentID) {
     data: {
       folder_name: folderName,
       user_ID: userID,
-      parent_ID: parentID,
+      parent_ID: parentID || null,
     },
   });
 }
@@ -25,6 +25,24 @@ async function getFolders(userID) {
   return await prisma.folder.findMany({
     where: {
       user_ID: userID,
+    },
+  });
+}
+
+async function getRootFolders(userID) {
+  return await prisma.folder.findMany({
+    where: {
+      user_ID: userID,
+      parent_ID: null,
+    },
+  });
+}
+
+async function getRootFiles(userID) {
+  return prisma.file.findMany({
+    where: {
+      user_ID: userID,
+      folder_ID: null,
     },
   });
 }
@@ -40,7 +58,7 @@ async function addFile(
   return await prisma.file.create({
     data: {
       file_name: fileName,
-      folder_ID: folderID,
+      folder_ID: folderID || null,
       user_ID: userID,
       file_type: fileType,
       file_size: fileSize,
@@ -54,4 +72,6 @@ module.exports = {
   createFolder,
   addFile,
   getFolders,
+  getRootFolders,
+  getRootFiles,
 };

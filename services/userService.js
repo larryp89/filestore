@@ -36,6 +36,14 @@ async function getFolders(userID) {
   return await userRepository.getFolders(userID);
 }
 
+async function getRootFolders(userID) {
+  return await userRepository.getRootFolders(userID);
+}
+
+async function getRootFiles(userID) {
+  return await userRepository.getRootFiles(userID);
+}
+
 async function uploadToSupabase(file, filename, userID) {
   return supabase.storage
     .from("All Files")
@@ -56,4 +64,6 @@ module.exports = {
   getFolders,
   uploadToSupabase,
   getPublicURL,
+  getRootFolders,
+  getRootFiles,
 };

@@ -6,13 +6,33 @@
     <title>Documents</title>
   </head>
   <body>
+    <%- include('./partials/navbar') %>
     <h1>All your uploads are shown here</h1>
     <% if (folders.length == 0) {%>
     <h2>You have not created any folders</h2>
     <% } else { %>
-    <% for(let folder of folders ) { %>
-    <li><%=folder.folder_name%></li>
+    <ul>
+      <% for(let folder of folders ) { %>
+      <li>
+        <a href="/folder/<%=folder.id%>"><%=folder.folder_name%></a>
+      </li>
+      <% } %>
+    </ul>
     <% } %>
+
+    <h1>Any files not in folders are shown here</h1>
+    <% if (files.length == 0) {%>
+    <h2>You have not uploaded any folders</h2>
+    <% } else { %>
+    <ul>
+      <% for(let file of files ) { %>
+      <li><%=file %></li>
+      <% } %>
+    </ul>
     <% } %>
   </body>
 </html>
+
+<!-- 
+/documents/:folderID
+-->

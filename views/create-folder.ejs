@@ -10,12 +10,14 @@
     <%- include('./partials/navbar') %>
     <%- include('./partials/errors') %>
     <form action="/create-folder" method="POST">
+      <label for="folderName">Folder Name</label>
       <input type="text" name="folderName" />
       <label for="parentFolder">Parent folder</label>
+      <% if (folders.length === 0) { %>
+      <h3>You have not created any folders</h3>
+      <% } %>
       <select name="parentFolder" id="parentFolder">
-        <% if (folders.length == 0) { %>
-        <h3>You have not created any folders</h3>
-        <% } %>
+        <option>(No parent folder)</option>
         <% if (folders.length > 0) { %>
         <option>(No parent folder)</option>
         <% for( let folder of folders) { %>
