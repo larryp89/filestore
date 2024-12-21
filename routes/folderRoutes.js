@@ -9,5 +9,6 @@ folderRoutes.post(
   validateFolderName,
   folderController.createFolder,
 );
+folderRoutes.get("/folder/:subfolder", folderController.getSubfolders);
 
 module.exports = folderRoutes;

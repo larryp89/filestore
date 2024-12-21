@@ -2,7 +2,8 @@ const { validationResult } = require("express-validator");
 const userService = require("../services/userService");
 
 const getAddFile = async (req, res) => {
-  const folders = await userService.getFolders();
+  const userID = req.user.id;
+  const folders = await userService.getFolders(userID);
   res.render("add-file", { errors: [], folders: folders });
 };
 
@@ -40,4 +41,9 @@ const addFile = async (req, res) => {
   res.render("home", { errors: [] });
 };
 
-module.exports = { getAddFile, addFile };
+const deleteFile = async (req, res) => {
+  const fileID = req.body.fileID;
+  console.log(fileID);
+};
+
+module.exports = { getAddFile, addFile, deleteFile };

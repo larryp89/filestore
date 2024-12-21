@@ -29,6 +29,15 @@ async function getFolders(userID) {
   });
 }
 
+async function getSubfolders(userID, folderID) {
+  return await prisma.folder.findMany({
+    where: {
+      user_ID: userID,
+      parent_ID: folderID,
+    },
+  });
+}
+
 async function getRootFolders(userID) {
   return await prisma.folder.findMany({
     where: {
@@ -67,6 +76,23 @@ async function addFile(
   });
 }
 
+async function deleteFile(fileID) {
+  return await prisma.file.delete({
+    where: {
+      id: fileID,
+    },
+  });
+}
+
+async function getFolderFiles(userID, folderID) {
+  return await prisma.file.findMany({
+    where: {
+      folder_ID: folderID,
+      user_ID: userID,
+    },
+  });
+}
+
 module.exports = {
   createUser,
   createFolder,
@@ -74,4 +100,7 @@ module.exports = {
   getFolders,
   getRootFolders,
   getRootFiles,
+  getSubfolders,
+  getFolderFiles,
+  deleteFile,
 };

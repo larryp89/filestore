@@ -39,8 +39,6 @@ const getDocuments = async (req, res) => {
   const currentUser = req.user.id;
   const folders = await userService.getRootFolders(currentUser);
   const files = await userService.getRootFiles(currentUser);
-  console.log(folders);
-  console.log(files);
   return res.render("documents", { folders, files });
 };
 module.exports = { getSignup, signup, getLogin, login, logout, getDocuments };

@@ -7,7 +7,7 @@
   </head>
   <body>
     <%- include('./partials/navbar') %>
-    <h1>All your uploads are shown here</h1>
+    <h1>All your folders are shown here</h1>
     <% if (folders.length == 0) {%>
     <h2>You have not created any folders</h2>
     <% } else { %>
@@ -22,11 +22,21 @@
 
     <h1>Any files not in folders are shown here</h1>
     <% if (files.length == 0) {%>
-    <h2>You have not uploaded any folders</h2>
+    <h2>You have not uploaded any files</h2>
     <% } else { %>
     <ul>
       <% for(let file of files ) { %>
-      <li><%=file %></li>
+      <li><%=file.file_name %></li>
+      <button>
+        <a href="<%=file.file_URL %>">Download</a>
+      </button>
+      <form action="/delete-file" method="POST">
+        <input type="hidden" name="fileID" value="<%=file.id %>" />
+        <button type="submit" data-id="<%file.id %>">Delete</button>
+      </form>
+      <form action="rename-file"></form>
+      <button type="submit">Rename File</button>
+
       <% } %>
     </ul>
     <% } %>

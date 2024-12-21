@@ -32,8 +32,16 @@ async function addFileToDatabase(
   );
 }
 
+async function deleteFile(fileID) {
+  return await userRepository.deleteFile(fileID);
+}
+
 async function getFolders(userID) {
   return await userRepository.getFolders(userID);
+}
+
+async function getSubfolders(userID, folderID) {
+  return await userRepository.getSubfolders(userID, folderID);
 }
 
 async function getRootFolders(userID) {
@@ -42,6 +50,10 @@ async function getRootFolders(userID) {
 
 async function getRootFiles(userID) {
   return await userRepository.getRootFiles(userID);
+}
+
+async function getFolderFiles(userID, folderID) {
+  return await userRepository.getFolderFiles(userID, folderID);
 }
 
 async function uploadToSupabase(file, filename, userID) {
@@ -62,6 +74,8 @@ module.exports = {
   createFolder,
   addFileToDatabase,
   getFolders,
+  getSubfolders,
+  getFolderFiles,
   uploadToSupabase,
   getPublicURL,
   getRootFolders,
