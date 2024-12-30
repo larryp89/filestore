@@ -76,10 +76,11 @@ async function addFile(
   });
 }
 
-async function deleteFile(fileID) {
+async function deleteFile(fileID, userID) {
   return await prisma.file.delete({
     where: {
       id: fileID,
+      user_ID: userID,
     },
   });
 }

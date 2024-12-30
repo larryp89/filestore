@@ -32,6 +32,7 @@
       </button>
       <form action="/delete-file" method="POST">
         <input type="hidden" name="fileID" value="<%=file.id %>" />
+        <input type="hidden" name="fileName" value="<%=file.file_name %>" />
         <button type="submit" data-id="<%file.id %>">Delete</button>
       </form>
       <form action="rename-file"></form>

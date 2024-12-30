@@ -42,8 +42,12 @@ const addFile = async (req, res) => {
 };
 
 const deleteFile = async (req, res) => {
-  const fileID = req.body.fileID;
-  console.log(fileID);
+  const fileName = req.body.fileName;
+  console.log("The file is called", fileName);
+  const fileID = parseInt(req.body.fileID);
+  const userID = parseInt(req.user.id);
+  await userService.deleteFile(fileID, userID, fileName);
+  res.redirect("/documents");
 };
 
 module.exports = { getAddFile, addFile, deleteFile };

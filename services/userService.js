@@ -65,6 +65,19 @@ async function uploadToSupabase(file, filename, userID) {
     });
 }
 
+async function deleteFile(fileID, userID, fileName) {
+  await userRepository.deleteFile(fileID, userID);
+  const data = await deleteFromSupabase(fileName, userID);
+  console.log("The returned data is", data);
+  return;
+}
+async function deleteFromSupabase(filename, userID) {
+  const { data, error } = await supabase.storage
+    .from("All Files")
+    .remove([`${userID}/${filename}`]);
+  return data;
+}
+
 async function getPublicURL(path) {
   return await supabase.storage.from(supabaseBucket).getPublicUrl(path);
 }
@@ -80,4 +93,5 @@ module.exports = {
   getPublicURL,
   getRootFolders,
   getRootFiles,
+  deleteFile,
 };
