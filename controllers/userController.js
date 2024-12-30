@@ -12,6 +12,9 @@ const signup = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.render("sign-up", { errors: errors.array() });
   }
+  const email = req.body.email;
+  const password = req.body.password;
+  userService.createUser(email, password);
   console.log("Successfully signed up!");
   return res.render("login", { errors: [] });
 };
