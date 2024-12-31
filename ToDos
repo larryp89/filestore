@@ -41,3 +41,5 @@ Application flow:
 - Login/Sign up
 - Create a file (via Prisma)
 - Upload a file (Multer --> Store in supabase bucket)
+
+TODO: Prevent error when upload same file twice

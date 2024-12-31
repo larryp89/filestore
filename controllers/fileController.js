@@ -21,24 +21,24 @@ const addFile = async (req, res) => {
   const { data: uploadFile, error: uploadError } =
     await userService.uploadToSupabase(buffer, fileName, userID);
 
-  console.log("THE UPLOAD FILE DATA IS", uploadFile.path);
+  try {
+    const { data: urlData, error: urlError } = await userService.getPublicURL(
+      uploadFile.path,
+    );
 
-  const { data: urlData, error: urlError } = await userService.getPublicURL(
-    uploadFile.path,
-  );
-
-  console.log("THE URL DATA IS", urlData);
-
-  // Update DB
-  await userService.addFileToDatabase(
-    fileName,
-    folderID,
-    userID,
-    fileType,
-    fileSize,
-    urlData.publicUrl,
-  );
-  res.render("home", { errors: [] });
+    // Update DB
+    await userService.addFileToDatabase(
+      fileName,
+      folderID,
+      userID,
+      fileType,
+      fileSize,
+      urlData.publicUrl,
+    );
+    res.render("home", { errors: [] });
+  } catch {
+    console.log("Oops an error occurred");
+  }
 };
 
 const deleteFile = async (req, res) => {
