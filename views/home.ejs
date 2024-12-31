@@ -4,29 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="/css/output.css" />
   </head>
   <body>
-    <h1>Welcome to MyDocs</h1>
+    <h1 class="text-center bg-blue-500 text-white p-4">Welcome to MyDocs</h1>
     <% if (currentUser) { %>
     <%- include('./partials/navbar') %>
-    <h1>
-      Hi
-      <%= currentUser.email %>
-    </h1>
-    <form action="/logout" method="POST">
-      <button type="submit">Logout</button>
+    <h2 class="text-xl font-semibold mt-4">Hi <%= currentUser.email %></h2>
+    <form action="/logout" method="POST" class="mt-2">
+      <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded">
+        Logout
+      </button>
     </form>
-
     <%- include('./partials/errors') %>
     <% } else { %>
-    <h2>Please log in</h2>
-    <form action="/login" method="POST">
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" />
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
-      <button type="submit">Login</button>
-      <a href="/sign-up">Sign up</a>
+    <h2 class="text-lg font-bold">Please log in</h2>
+    <form action="/login" method="POST" class="mt-4 space-y-4">
+      <div>
+        <label for="email" class="block text-gray-700">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="border border-gray-300 p-2 rounded w-full"
+        />
+      </div>
+      <div>
+        <label for="password" class="block text-gray-700">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="border border-gray-300 p-2 rounded w-full"
+        />
+      </div>
+      <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">
+        Login
+      </button>
+      <a href="/sign-up" class="text-blue-500 hover:underline">Sign up</a>
     </form>
     <% } %>
   </body>
