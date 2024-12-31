@@ -57,12 +57,24 @@ async function getFolderFiles(userID, folderID) {
 }
 
 async function uploadToSupabase(file, filename, userID) {
-  return supabase.storage
-    .from("All Files")
-    .upload(`/${userID}/${filename}`, file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
+  try {
+    const { data, error } = await supabase.storage
+      .from("All Files")
+      .upload(`${userID}/${filename}`, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+    if (error) {
+      console.error("Upload error:", error.message);
+      return { data, error }; // data returned as null if an error
+    }
+
+    console.log("File uploaded successfully:", data);
+    return { data, error }; // error returend as null if no error
+  } catch (err) {
+    console.error("Unexpected error:", err.message);
+    return { data: null, error: err };
+  }
 }
 
 async function deleteFile(fileID, userID, fileName) {

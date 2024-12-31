@@ -18,14 +18,28 @@ const addFile = async (req, res) => {
   const folderID = parseInt(req.body.parentFolder);
 
   // Upload to Supabase
-  const { data: uploadFile, error: uploadError } =
-    await userService.uploadToSupabase(buffer, fileName, userID);
-
   try {
+    const { data: uploadFile, error: uploadError } =
+      await userService.uploadToSupabase(buffer, fileName, userID);
+
+    if (uploadError) {
+      console.error("Upload error:", uploadError);
+      return res.render("add-file", {
+        errors: [{ msg: uploadError.message }],
+        folders: [],
+      });
+    }
+    console.log("Upload file:", uploadFile);
     const { data: urlData, error: urlError } = await userService.getPublicURL(
       uploadFile.path,
     );
-
+    if (urlError) {
+      console.error("URL error:", urlError);
+      return res.render("add-file", {
+        errors: [{ msg: "Failed to get file URL" }],
+        folders: [],
+      });
+    }
     // Update DB
     await userService.addFileToDatabase(
       fileName,
@@ -37,7 +51,7 @@ const addFile = async (req, res) => {
     );
     res.render("home", { errors: [] });
   } catch {
-    console.log("Oops an error occurred");
+    console.log("URL Error");
   }
 };
 
