@@ -3,47 +3,179 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Documents</title>
+    <link rel="stylesheet" href="/css/output.css" />
+    <title>My Documents - MyDocs</title>
   </head>
-  <body>
-    <%- include('./partials/navbar') %>
-    <h1>All your folders are shown here</h1>
-    <% if (folders.length == 0) {%>
-    <h2>You have not created any folders</h2>
-    <% } else { %>
-    <ul>
-      <% for(let folder of folders ) { %>
-      <li>
-        <a href="/folder/<%=folder.id%>"><%=folder.folder_name%></a>
-      </li>
-      <% } %>
-    </ul>
-    <% } %>
+  <body class="bg-gray-50 min-h-screen">
+    <div class="min-h-screen flex flex-col">
+      <header class="bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg">
+        <h1 class="text-3xl font-bold text-center text-white py-6">MyDocs</h1>
+      </header>
 
-    <h1>Any files not in folders are shown here</h1>
-    <% if (files.length == 0) {%>
-    <h2>You have not uploaded any files</h2>
-    <% } else { %>
-    <ul>
-      <% for(let file of files ) { %>
-      <li><%=file.file_name %></li>
-      <button>
-        <a href="<%=file.file_URL %>">Download</a>
-      </button>
-      <form action="/delete-file" method="POST">
-        <input type="hidden" name="fileID" value="<%=file.id %>" />
-        <input type="hidden" name="fileName" value="<%=file.file_name %>" />
-        <button type="submit" data-id="<%file.id %>">Delete</button>
-      </form>
-      <form action="rename-file"></form>
-      <button type="submit">Rename File</button>
+      <%- include('./partials/navbar') %>
 
-      <% } %>
-    </ul>
-    <% } %>
+      <main class="container mx-auto px-4 py-8 flex-grow">
+        <div class="max-w-4xl mx-auto space-y-8">
+          <!-- Folders Section -->
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <h2
+              class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                ></path>
+              </svg>
+              Folders
+            </h2>
+
+            <% if (folders.length === 0) { %>
+            <div class="text-center py-8">
+              <p class="text-gray-500">You haven't created any folders yet</p>
+              <a
+                href="/create-folder"
+                class="inline-block mt-4 text-blue-600 hover:text-blue-700"
+                >Create your first folder</a
+              >
+            </div>
+            <% } else { %>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <% for(let folder of folders) { %>
+              <a
+                href="/folder/<%= folder.id %>"
+                class="block p-4 border rounded-lg hover:bg-blue-50 transition duration-200"
+              >
+                <div class="flex items-center space-x-3">
+                  <svg
+                    class="w-5 h-5 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+                    ></path>
+                  </svg>
+                  <span class="text-gray-700 font-medium"
+                    ><%= folder.folder_name %></span
+                  >
+                </div>
+              </a>
+              <% } %>
+            </div>
+            <% } %>
+          </div>
+
+          <!-- Files Section -->
+          <div class="bg-white rounded-lg shadow-sm p-6">
+            <h2
+              class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                ></path>
+              </svg>
+              Unorganized Files
+            </h2>
+
+            <% if (files.length === 0) { %>
+            <div class="text-center py-8">
+              <p class="text-gray-500">No files outside folders</p>
+              <a
+                href="/add-file"
+                class="inline-block mt-4 text-blue-600 hover:text-blue-700"
+                >Upload a file</a
+              >
+            </div>
+            <% } else { %>
+            <div class="divide-y">
+              <% for(let file of files) { %>
+              <div class="py-4 flex items-center justify-between">
+                <span class="text-gray-700"><%= file.file_name %></span>
+                <div class="flex items-center space-x-2">
+                  <a
+                    href="<%= file.file_URL %>"
+                    class="inline-flex items-center px-3 py-1 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 transition duration-200"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                      ></path>
+                    </svg>
+                    Download
+                  </a>
+
+                  <form action="/delete-file" method="POST" class="inline">
+                    <input type="hidden" name="fileID" value="<%= file.id %>" />
+                    <input
+                      type="hidden"
+                      name="fileName"
+                      value="<%= file.file_name %>"
+                    />
+                    <button
+                      type="submit"
+                      class="inline-flex items-center px-3 py-1 border border-red-600 text-red-600 rounded hover:bg-red-50 transition duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        ></path>
+                      </svg>
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <% } %>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </main>
+
+      <footer class="bg-gray-100 border-t mt-auto">
+        <div class="container mx-auto px-4 py-6">
+          <p class="text-center text-gray-600 text-sm">
+            &copy; 2024 MyDocs. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
-
-<!-- 
-/documents/:folderID
--->

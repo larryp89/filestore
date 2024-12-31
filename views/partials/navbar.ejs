@@ -1,6 +1,77 @@
-<nav>
-  <a href="/">Home</a>
-  <a href="/add-file">Add file</a>
-  <a href="/create-folder">Create folder</a>
-  <a href="/documents">View documents</a>
+<nav class="bg-white border-b shadow-sm">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center">
+        <a href="/" class="text-xl font-semibold text-blue-600">MyDocs</a>
+      </div>
+      <div class="hidden md:flex items-center space-x-8">
+        <a
+          href="/"
+          class="text-gray-600 hover:text-blue-600 transition duration-200"
+          >Home</a
+        >
+        <a
+          href="/add-file"
+          class="text-gray-600 hover:text-blue-600 transition duration-200"
+          >Add file</a
+        >
+        <a
+          href="/create-folder"
+          class="text-gray-600 hover:text-blue-600 transition duration-200"
+          >Create folder</a
+        >
+        <a
+          href="/documents"
+          class="text-gray-600 hover:text-blue-600 transition duration-200"
+          >View documents</a
+        >
+      </div>
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button
+          type="button"
+          class="text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile menu, show/hide based on menu state -->
+  <div class="md:hidden hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a
+        href="/"
+        class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition duration-200"
+        >Home</a
+      >
+      <a
+        href="/add-file"
+        class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition duration-200"
+        >Add file</a
+      >
+      <a
+        href="/create-folder"
+        class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition duration-200"
+        >Create folder</a
+      >
+      <a
+        href="/documents"
+        class="block px-3 py-2 text-gray-600 hover:text-blue-600 transition duration-200"
+        >View documents</a
+      >
+    </div>
+  </div>
 </nav>
