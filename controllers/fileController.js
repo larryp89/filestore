@@ -55,7 +55,7 @@ const addFile = async (req, res) => {
       fileSize,
       urlData.publicUrl,
     );
-    res.render("home", { errors: [] });
+    res.redirect("documents");
   } catch {
     console.log("URL Error");
   }

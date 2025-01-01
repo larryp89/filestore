@@ -39,7 +39,7 @@ model Folder {
   parent      Folder?  @relation("Subfolders", fields: [parent_ID], references: [id], onDelete: Cascade)
   subfolders  Folder[] @relation("Subfolders")
 
-  @@unique([folder_name, user_ID]) // Folder names must be unique   within a user, but not between users
+  @@unique([folder_name, user_ID]) // Folder names must be unique within a user, but not between users
 }
 
 model File {

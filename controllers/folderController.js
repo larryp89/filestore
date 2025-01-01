@@ -22,9 +22,14 @@ const createFolder = async (req, res) => {
       });
     }
     await userService.createFolder(folderName, userID, parentID);
-    return res.render("home", { errors: [] });
+    return res.redirect("documents");
   } catch (error) {
-    console.log("Error creating folder:", error);
+    console.log("Error creating folder:", error.message);
+    const folders = await userService.getFolders(req.user.id);
+    return res.render("create-folder", {
+      errors: [{ msg: error.message }],
+      folders: folders,
+    });
   }
 };
 
@@ -40,7 +45,7 @@ const deleteFolder = async (req, res) => {
   const folderID = parseInt(req.body.deleteFolder);
   const userID = req.user.id;
   await userService.deleteFolderAndContents(folderID, userID);
-  return res.send("OKAY");
+  return res.redirect("documents");
 };
 
 module.exports = { getCreateFolder, createFolder, getSubfolders, deleteFolder };

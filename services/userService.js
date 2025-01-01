@@ -11,7 +11,16 @@ async function createUser(email, password) {
 }
 
 async function createFolder(folderName, userID, parentID) {
-  return await userRepository.createFolder(folderName, userID, parentID);
+  try {
+    return await userRepository.createFolder(folderName, userID, parentID);
+  } catch (error) {
+    if (error.code === "P2002" && error.meta.target.includes("folder_name")) {
+      throw new Error(
+        "A folder with this name already exists. Please choose a different name.",
+      );
+    }
+    throw error;
+  }
 }
 
 async function addFileToDatabase(
