@@ -94,6 +94,15 @@ async function getFolderFiles(userID, folderID) {
   });
 }
 
+async function deleteFolder(userID, folderID) {
+  return await prisma.folder.delete({
+    where: {
+      id: folderID,
+      user_ID: userID,
+    },
+  });
+}
+
 module.exports = {
   createUser,
   createFolder,
@@ -104,4 +113,5 @@ module.exports = {
   getSubfolders,
   getFolderFiles,
   deleteFile,
+  deleteFolder,
 };

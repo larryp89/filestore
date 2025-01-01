@@ -92,6 +92,27 @@ async function getPublicURL(path) {
   return supabase.storage.from(supabaseBucket).getPublicUrl(path);
 }
 
+async function deleteFolderAndContents(folderID, userID) {
+  // Find all subfolders
+  const subfolders = await userRepository.getSubfolders(userID, folderID);
+
+  // Recursively delete subfolders and their content
+  for (const subfolder of subfolders) {
+    await deleteFolderAndContents(subfolder.id, userID);
+  }
+
+  // If no more subfolders, will continue to here //
+
+  // Find and delete all files in the subfolder
+  const files = await userRepository.getFolderFiles(userID, folderID);
+  for (const file of files) {
+    await deleteFromSupabase(file.file_name, userID);
+  }
+
+  // Delete folder (files delete on cascade)
+  await userRepository.deleteFolder(userID, folderID);
+}
+
 module.exports = {
   createUser,
   createFolder,
@@ -104,4 +125,5 @@ module.exports = {
   getRootFolders,
   getRootFiles,
   deleteFile,
+  deleteFolderAndContents,
 };

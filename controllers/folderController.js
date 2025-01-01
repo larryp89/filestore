@@ -36,4 +36,11 @@ const getSubfolders = async (req, res) => {
   return res.render("documents", { folders: subfolders, files: files });
 };
 
-module.exports = { getCreateFolder, createFolder, getSubfolders };
+const deleteFolder = async (req, res) => {
+  const folderID = parseInt(req.body.deleteFolder);
+  const userID = req.user.id;
+  await userService.deleteFolderAndContents(folderID, userID);
+  return res.send("OKAY");
+};
+
+module.exports = { getCreateFolder, createFolder, getSubfolders, deleteFolder };

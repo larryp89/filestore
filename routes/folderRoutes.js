@@ -10,5 +10,5 @@ folderRoutes.post(
   folderController.createFolder,
 );
 folderRoutes.get("/folder/:subfolder", folderController.getSubfolders);
-
+folderRoutes.post("/delete-folder", folderController.deleteFolder);
 module.exports = folderRoutes;
