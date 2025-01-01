@@ -25,7 +25,7 @@ model User {
 model Session {
   id        String   @id
   sid       String   @unique
-  data      String  
+  data      String
   expiresAt DateTime
 }
 
@@ -36,7 +36,7 @@ model Folder {
   user_ID     Int // Shown in the DB
   files       File[]
   parent_ID   Int? // References ID of another folder (Nullable for root folder)
-  parent      Folder?  @relation("Subfolders", fields: [parent_ID], references: [id])
+  parent      Folder?  @relation("Subfolders", fields: [parent_ID], references: [id], onDelete: Cascade)
   subfolders  Folder[] @relation("Subfolders")
 
   @@unique([folder_name, user_ID]) // Folder names must be unique   within a user, but not between users
@@ -45,7 +45,7 @@ model Folder {
 model File {
   id        Int     @id @default(autoincrement())
   file_name String
-  folder    Folder? @relation(fields: [folder_ID], references: [id])
+  folder    Folder? @relation(fields: [folder_ID], references: [id], onDelete: Cascade)
   folder_ID Int? // Optional since a file can exist outside of a folder
   user      User    @relation(fields: [user_ID], references: [id])
   user_ID   Int

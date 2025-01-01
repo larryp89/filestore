@@ -42,4 +42,4 @@ Application flow:
 - Create a file (via Prisma)
 - Upload a file (Multer --> Store in supabase bucket)
 
-TODO: Prevent error when upload same file twice
+TODO: Delete files from supabase when delete a folder and any subfolders

@@ -10,6 +10,12 @@ const getAddFile = async (req, res) => {
 // Add file to Supbase bucket & upload details to database
 const addFile = async (req, res) => {
   // Extract file data from form & req object
+  if (!req.file) {
+    return res.render("add-file", {
+      errors: [{ msg: "No file uploaded" }],
+      folders: await userService.getFolders(req.user.id),
+    });
+  }
   const buffer = req.file.buffer;
   const fileName = req.file.originalname;
   const fileType = req.file.mimetype;
