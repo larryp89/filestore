@@ -188,6 +188,26 @@
                       Delete
                     </button>
                   </form>
+
+                  <!-- Expand -->
+                  <form action="/open/<%=file.id%>" method="GET" class="inline">
+                    <button
+                      type="submit"
+                      class="inline-flex items-center px-3 py-1 border border-green-600 text-green-600 rounded hover:bg-green-50 transition duration-200"
+                    >
+                      <svg
+                        class="w-4 h-4 mr-1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke="#28a745"
+                      >
+                        <path
+                          d="M4,2H2V22H4V13H18.17L12.67,18.5L14.08,19.92L22,12L14.08,4.08L12.67,5.5L18.17,11H4V2Z"
+                        />
+                      </svg>
+                      Open
+                    </button>
+                  </form>
                 </div>
               </div>
               <% } %>

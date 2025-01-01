@@ -70,4 +70,11 @@ const deleteFile = async (req, res) => {
   res.redirect("/documents");
 };
 
-module.exports = { getAddFile, addFile, deleteFile };
+const getFileDetails = async (req, res) => {
+  const fileID = parseInt(req.params.fileID);
+  const userID = req.user.id;
+  const fileDetails = await userService.getFileDetails(userID, fileID);
+  res.render("file-details", { fileDetails });
+};
+
+module.exports = { getAddFile, addFile, deleteFile, getFileDetails };

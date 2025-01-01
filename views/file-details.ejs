@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/output.css" />
+    <title>Document Details - MyDocs</title>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <%- include('./partials/navbar') %>
+    <main class="container mx-auto px-4 py-8">
+      <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-sm">
+        <h1 class="text-2xl font-semibold text-gray-800 mb-6">File Details</h1>
+        <table class="min-w-full bg-white border">
+          <thead>
+            <tr>
+              <th class="py-3 px-4 border-b text-left text-gray-600">
+                File Name
+              </th>
+              <th class="py-3 px-4 border-b text-left text-gray-600">
+                File Size
+              </th>
+              <th class="py-3 px-4 border-b text-left text-gray-600">
+                Upload date
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-3 px-4 border-b text-gray-700">
+                <%= fileDetails.file_name %>
+              </td>
+              <td class="py-3 px-4 border-b text-gray-700">
+                <%= (fileDetails.file_size / (1024 * 1024)).toFixed(2) %> MB
+              </td>
+              <td class="py-3 px-4 border-b text-gray-700">
+                <%= new Date(fileDetails.created_at).toLocaleString() %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Button container with flex display and spacing -->
+        <div class="flex space-x-4 mt-6">
+          <a
+            href="<%= fileDetails.file_URL %>"
+            class="inline-flex items-center px-3 py-1 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 transition duration-200"
+          >
+            <svg
+              class="w-4 h-4 mr-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              ></path>
+            </svg>
+            Download
+          </a>
+
+          <form action="/delete-file" method="POST" class="inline">
+            <input type="hidden" name="fileID" value="<%= fileDetails.id %>" />
+            <button
+              type="submit"
+              class="inline-flex items-center px-3 py-1 border border-red-600 text-red-600 rounded hover:bg-red-50 transition duration-200"
+            >
+              <svg
+                class="w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+              Delete
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

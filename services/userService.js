@@ -90,6 +90,7 @@ async function deleteFile(fileID, userID, fileName) {
   await userRepository.deleteFile(fileID, userID);
   return deleteFromSupabase(fileName, userID);
 }
+
 async function deleteFromSupabase(filename, userID) {
   const { data, error } = await supabase.storage
     .from("All Files")
@@ -122,6 +123,10 @@ async function deleteFolderAndContents(folderID, userID) {
   await userRepository.deleteFolder(userID, folderID);
 }
 
+async function getFileDetails(userID, fileID) {
+  return userRepository.getFileDetails(userID, fileID);
+}
+
 module.exports = {
   createUser,
   createFolder,
@@ -135,4 +140,5 @@ module.exports = {
   getRootFiles,
   deleteFile,
   deleteFolderAndContents,
+  getFileDetails,
 };

@@ -43,15 +43,16 @@ model Folder {
 }
 
 model File {
-  id        Int     @id @default(autoincrement())
-  file_name String
-  folder    Folder? @relation(fields: [folder_ID], references: [id], onDelete: Cascade)
-  folder_ID Int? // Optional since a file can exist outside of a folder
-  user      User    @relation(fields: [user_ID], references: [id])
-  user_ID   Int
-  file_type String
-  file_size Int
-  file_URL  String
+  id         Int      @id @default(autoincrement())
+  file_name  String
+  folder     Folder?  @relation(fields: [folder_ID], references: [id], onDelete: Cascade)
+  folder_ID  Int? // Optional since a file can exist outside of a folder
+  user       User     @relation(fields: [user_ID], references: [id])
+  user_ID    Int
+  file_type  String
+  file_size  Int
+  file_URL   String
+  created_at DateTime @default(now())
 
   @@unique([file_name, folder_ID])
 }
