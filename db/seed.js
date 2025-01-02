@@ -7,7 +7,7 @@ async function main() {
   await prisma.user.create({
     data: {
       email: process.ADMIN_EMAIL,
-      password: process.ADMIN_PASSDWORD,
+      password: process.ADMIN_PASSWORD,
     },
   });
 
