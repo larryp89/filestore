@@ -75,3 +75,25 @@
     </div>
   </div>
 </nav>
+
+<script>
+  // Get the mobile menu button and menu container
+  const menuButton = document.querySelector("button");
+  const mobileMenu = document.querySelector(".md\\:hidden.hidden");
+
+  // Add click event listener to toggle menu
+  menuButton.addEventListener("click", () => {
+    // Toggle the 'hidden' class on the mobile menu
+    mobileMenu.classList.toggle("hidden");
+
+    // Get the SVG path for the menu icon
+    const menuIcon = menuButton.querySelector("path");
+
+    // Toggle between hamburger and X icon
+    if (mobileMenu.classList.contains("hidden")) {
+      menuIcon.setAttribute("d", "M4 6h16M4 12h16M4 18h16");
+    } else {
+      menuIcon.setAttribute("d", "M6 18L18 6M6 6l12 12");
+    }
+  });
+</script>
