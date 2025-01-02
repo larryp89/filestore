@@ -24,6 +24,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/css/output.css --watch"
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/css/output.css --watch",
+    "postinstall": "prisma migrate deploy"
   }
 }
