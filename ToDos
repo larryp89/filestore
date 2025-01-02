@@ -35,11 +35,9 @@ PLAN
 
 6. Store uploaded files in a cloud storage service:
 
-TODO: Change Admin details in seed
 
 Application flow:
 - Login/Sign up
 - Create a file (via Prisma)
 - Upload a file (Multer --> Store in supabase bucket)
 
-TODO: Delete files from supabase when delete a folder and any subfolders
