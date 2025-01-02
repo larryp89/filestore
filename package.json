@@ -25,7 +25,7 @@
     "start": "node api/index.ts",
     "dev": "nodemon app.js",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/css/output.css ",
-    "build": "npm run build:css && prisma generate",
+    "build": "npm run build:css && prisma generate && prisma migrate deploy",
     "postinstall": "prisma migrate deploy && prisma generate"
   }
 }
