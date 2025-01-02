@@ -26,6 +26,6 @@
     "dev": "nodemon app.js",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./public/css/output.css ",
     "build": "npm run build:css && prisma generate",
-    "postinstall": "prisma migrate deploy"
+    "postinstall": "prisma migrate deploy && prisma generate"
   }
 }
