@@ -36,9 +36,15 @@ const createFolder = async (req, res) => {
 const getSubfolders = async (req, res) => {
   const folderID = parseInt(req.params.subfolder);
   const userID = req.user.id;
+  const folderDetails = await userService.getFolderDetails(userID, folderID);
+  const folderName = folderDetails.folder_name;
   const subfolders = await userService.getSubfolders(userID, folderID);
   const files = await userService.getFolderFiles(userID, folderID);
-  return res.render("documents", { folders: subfolders, files: files });
+  return res.render("documents", {
+    folders: subfolders,
+    files: files,
+    folderName,
+  });
 };
 
 const deleteFolder = async (req, res) => {

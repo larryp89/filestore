@@ -112,6 +112,15 @@ async function getFileDetails(userID, fileID) {
   });
 }
 
+async function getFolderDetails(userID, folderID) {
+  return await prisma.folder.findFirst({
+    where: {
+      user_ID: userID,
+      id: folderID,
+    },
+  });
+}
+
 module.exports = {
   createUser,
   createFolder,
@@ -124,4 +133,5 @@ module.exports = {
   deleteFile,
   deleteFolder,
   getFileDetails,
+  getFolderDetails,
 };

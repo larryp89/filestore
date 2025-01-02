@@ -15,6 +15,11 @@
       <%- include('./partials/navbar') %>
 
       <main class="container mx-auto px-4 py-8 flex-grow">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+          Current folder:
+          <%= folderName == undefined ? "Root directory" : folderName
+          %>
+        </h2>
         <div class="max-w-4xl mx-auto space-y-8">
           <!-- Folders Section -->
           <div class="bg-white rounded-lg shadow-sm p-6">

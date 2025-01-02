@@ -39,9 +39,10 @@ const logout = async (req, res) => {
 };
 
 const getDocuments = async (req, res) => {
+  let folderName;
   const currentUser = req.user.id;
   const folders = await userService.getRootFolders(currentUser);
   const files = await userService.getRootFiles(currentUser);
-  return res.render("documents", { folders, files });
+  return res.render("documents", { folders, files, folderName });
 };
 module.exports = { getSignup, signup, getLogin, login, logout, getDocuments };

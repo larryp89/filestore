@@ -127,6 +127,9 @@ async function getFileDetails(userID, fileID) {
   return userRepository.getFileDetails(userID, fileID);
 }
 
+async function getFolderDetails(userID, folderID) {
+  return userRepository.getFolderDetails(userID, folderID);
+}
 module.exports = {
   createUser,
   createFolder,
@@ -141,4 +144,5 @@ module.exports = {
   deleteFile,
   deleteFolderAndContents,
   getFileDetails,
+  getFolderDetails,
 };
