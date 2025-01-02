@@ -35,7 +35,6 @@ const addFile = async (req, res) => {
         folders: [],
       });
     }
-    console.log("Upload file:", uploadFile);
     const { data: urlData, error: urlError } = await userService.getPublicURL(
       uploadFile.path,
     );
@@ -63,7 +62,6 @@ const addFile = async (req, res) => {
 
 const deleteFile = async (req, res) => {
   const fileName = req.body.fileName;
-  console.log("The file is called", fileName);
   const fileID = parseInt(req.body.fileID);
   const userID = parseInt(req.user.id);
   await userService.deleteFile(fileID, userID, fileName);
