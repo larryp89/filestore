@@ -1,16 +1,19 @@
 const prisma = require("./db");
 
+// Load the .env variables from the file into the process.env object
+require("dotenv").config();
+
 async function main() {
   await prisma.user.create({
     data: {
-      email: "admin@mail.com",
-      password: "helloworld",
+      email: process.ADMIN_EMAIL,
+      password: process.ADMIN_PASSDWORD,
     },
   });
 
   const user = await prisma.user.findUnique({
     where: {
-      email: "admin@mail.com",
+      email: process.ADMIN_EMAIL,
     },
   });
 
